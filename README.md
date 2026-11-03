@@ -13,6 +13,20 @@
 [release-link]: https://gitlab.com/timvisee/send/-/tags
 [repo-license-badge]: https://img.shields.io/github/license/timvisee/send.svg
 
+> **About this fork ([nastoo/send](https://github.com/nastoo/send))**
+>
+> This is a fork of [timvisee/send](https://gitlab.com/timvisee/send) that
+> fixes slow uploads over WebSocket ([#1](https://github.com/nastoo/send/pull/1)).
+> Upstream's send loop paused whenever more than 128 KB was buffered and then
+> slept 100 ms, capping upload throughput at around 1.3 MB/s no matter how fast
+> the connection was. This fork raises the buffer limit to 8 MB and polls every
+> 5 ms instead. The progress bar now also tracks bytes actually sent, so it no
+> longer reaches 100% while megabytes are still queued.
+>
+> A Docker image built from this fork is published to
+> `ghcr.io/nastoo/send` ([#2](https://github.com/nastoo/send/pull/2)).
+> Everything below is the upstream README.
+
 A fork of Mozilla's [Firefox Send][mozilla-send].
 Mozilla discontinued Send, this fork is a community effort to keep the project
 up-to-date and alive.
